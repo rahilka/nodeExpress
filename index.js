@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
 
 var port = process.env.PORT || 3000;
 
@@ -21,7 +23,11 @@ app.get('/api', function(req, res) {
 });
 
 app.get('/person/:page/:id', function(req, res) {
-  res.render('person', { ID: req.params.id })
+  res.render('person', { ID: req.params.id , Qstr: req.query.qstr });
+});
+
+app.get('/api/person', jsonParser, function(req, res) {
+  res.send({firstname: 'Rahilka'});
 });
 
 app.listen(port);
